@@ -5,7 +5,7 @@ Database course labs
 ## 📋 Progress
 
 - [x] **Lab1** - First laboratory work
-- [ ] Lab2 - Second laboratory work  
+- [x] **Lab2** - Second laboratory work  
 - [ ] Lab3 - Third laboratory work
 - [ ] Lab4 - Fourth laboratory work
 - [ ] Lab5 - Fifth laboratory work
