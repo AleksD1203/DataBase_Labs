@@ -6,7 +6,7 @@ Database course labs
 
 - [x] **Lab1** - First laboratory work
 - [x] **Lab2** - Second laboratory work  
-- [ ] Lab3 - Third laboratory work
+- [x] **Lab3** - Third laboratory work
 - [ ] Lab4 - Fourth laboratory work
 - [ ] Lab5 - Fifth laboratory work
 
@@ -31,3 +31,5 @@ This repository contains all laboratory works for the "Databases" course. Each l
 1.https://github.com/ZheniaTrochun/db-intro-course/blob/master/labs/1/Lab%201%20Requirements%20Gathering%20and%20ER%20Diagram%20Design%20uk.pdf
 
 2.https://github.com/ZheniaTrochun/db-intro-course/blob/master/labs/2/Lab%202%20Converting%20ER%20Diagram%20to%20a%20PostgreSQL%20Schema%20uk.pdf
+
+3.https://github.com/ZheniaTrochun/db-intro-course/blob/master/labs/3/Lab%203%20SQL%20Data%20Manipulation%20OLTP%20uk.pdf
