@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model booking {
+  booking_id   Int      @id @default(autoincrement())
+  customer_id  Int
+  booking_date DateTime @db.Date
+  customer     customer @relation(fields: [customer_id], references: [customer_id], onUpdate: NoAction)
+  ticket       ticket[]
+
+  @@index([customer_id], map: "idx_booking_customer")
+}
+
+model customer {
+  customer_id  Int       @id @default(autoincrement())
+  name         String    @db.VarChar(100)
+  email        String    @unique @db.VarChar(100)
+  phone_number String    @unique @db.VarChar(15)
+  booking      booking[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model hall {
+  hall_id     Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(50)
+  total_seats Int
+  seat        seat[]
+  session     session[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model movie {
+  movie_id     Int       @id @default(autoincrement())
+  title        String    @db.VarChar(200)
+  release_date DateTime  @db.Date
+  duration     Int
+  is_active    Boolean   @default(true)
+  reviews      Review[]
+  session      session[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model seat {
+  seat_id          Int      @id @default(autoincrement())
+  original_seat_id Int
+  hall_id          Int
+  row_number       Int
+  seat_number      String   @db.VarChar(10)
+  hall             hall     @relation(fields: [hall_id], references: [hall_id], onDelete: Cascade, onUpdate: NoAction)
+  ticket           ticket[]
+
+  @@unique([hall_id, row_number, seat_number])
+  @@unique([original_seat_id, hall_id])
+  @@index([hall_id], map: "idx_seat_hall")
+}
+
+model session {
+  session_id   Int      @id @default(autoincrement())
+  movie_id     Int
+  hall_id      Int
+  session_time DateTime @db.Timestamp(6)
+  hall         hall     @relation(fields: [hall_id], references: [hall_id], onUpdate: NoAction)
+  movie        movie    @relation(fields: [movie_id], references: [movie_id], onUpdate: NoAction)
+  ticket       ticket[]
+
+  @@unique([hall_id, session_time])
+  @@index([hall_id], map: "idx_session_hall")
+  @@index([movie_id], map: "idx_session_movie")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model ticket {
+  ticket_id  Int     @id @default(autoincrement())
+  booking_id Int
+  session_id Int
+  seat_id    Int
+  price      Decimal @db.Decimal(5, 2)
+  booking    booking @relation(fields: [booking_id], references: [booking_id], onDelete: Cascade, onUpdate: NoAction)
+  seat       seat    @relation(fields: [seat_id], references: [seat_id], onUpdate: NoAction)
+  session    session @relation(fields: [session_id], references: [session_id], onUpdate: NoAction)
+
+  @@unique([session_id, seat_id])
+  @@index([booking_id], map: "idx_ticket_booking")
+  @@index([session_id], map: "idx_ticket_session")
+}
+
+model Review {
+  id       Int     @id @default(autoincrement())
+  rating   Int
+  comment  String?
+  movie_id Int
+  movie    movie   @relation(fields: [movie_id], references: [movie_id])
+}

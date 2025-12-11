@@ -1,0 +1,27 @@
+{
+  "name": "database_labs",
+  "version": "1.0.0",
+  "description": "Database course labs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksD1203/DataBase_Labs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AleksD1203/DataBase_Labs/issues"
+  },
+  "homepage": "https://github.com/AleksD1203/DataBase_Labs#readme",
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
+  }
+}
